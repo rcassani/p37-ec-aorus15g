@@ -62,36 +62,36 @@ if [[ "$1" == "fix" || "$1" == "automax" ]]; then
 fi
 
 # Set all fan mode bits to zero (normal mode)
-./p37ec-aorus15g 0x08.6 0
-./p37ec-aorus15g 0x06.4 0
-./p37ec-aorus15g 0x0D.0 0
-./p37ec-aorus15g 0x0D.7 0
-./p37ec-aorus15g 0x0C.4 0
+p37ec-aorus15g 0x08.6 0
+p37ec-aorus15g 0x06.4 0
+p37ec-aorus15g 0x0D.0 0
+p37ec-aorus15g 0x0D.7 0
+p37ec-aorus15g 0x0C.4 0
 
 # For all other cases
 if [[ "$1" != "normal" ]]; then
   case $1 in
     quiet)
-      ./p37ec-aorus15g 0x08.6 1
+      p37ec-aorus15g 0x08.6 1
       ;;
     fix)
-      ./p37ec-aorus15g 0xB0 "$fan_speed_hex"
-      ./p37ec-aorus15g 0xB1 "$fan_speed_hex"
-      ./p37ec-aorus15g 0x06.4 1
+      p37ec-aorus15g 0xB0 "$fan_speed_hex"
+      p37ec-aorus15g 0xB1 "$fan_speed_hex"
+      p37ec-aorus15g 0x06.4 1
       ;;
     automax)
-      ./p37ec-aorus15g 0xB0 $fan_speed_hex
-      ./p37ec-aorus15g 0xB1 $fan_speed_hex
-      ./p37ec-aorus15g 0x0D.0 1
+      p37ec-aorus15g 0xB0 $fan_speed_hex
+      p37ec-aorus15g 0xB1 $fan_speed_hex
+      p37ec-aorus15g 0x0D.0 1
       ;;
     deepcontrol)
-      ./p37ec-aorus15g 0x0D.7 1
+      p37ec-aorus15g 0x0D.7 1
       ;;
     gaming)
-      ./p37ec-aorus15g 0x0C.4 1
+      p37ec-aorus15g 0x0C.4 1
       ;;
     *)
-      ./$0 normal
+      $0 normal
       ;;
   esac
 fi
