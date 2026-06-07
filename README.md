@@ -107,7 +107,9 @@ The module will be loaded automatically by the program so you don't need to
 load it yourself. But if you are having problems even though you run the
 program as root then the reason might be that your Linux kernel was not compiled
 with the `ec_sys` module. You can check whether the module is available on your system
-by executing `sudo modprobe ec_sys`
+by executing `sudo modprobe ec_sys`.
+
+If `ec_sys` on your system is compiled as a part of a kernel (like Debian kernels), and you can read your fan configuration but can't change it, you need to enable write support. Add `ec_sys.write_support=1` parameter to kernel command line (usually `/etc/default/grub`).
 
 # Support for other features for AORUS laptops
 In addition, the support for the +/- brightness function keys can be fixed with:  
