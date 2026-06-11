@@ -67,6 +67,26 @@ There are **six** fan modes available in the [AOURUS Control Center](https://dow
 \* For **Fix** mode, define the fan speed \%s in registers `0xB0` and `0xB1`  
 ^ For **AutoMax** mode, define the maximum fan speed \%s in registers `0xB0` and `0xB1`
 
+The fan mode can be easily set or queried with the bash script `set-fan-mode`
+```
+$ set-fan-mode --help
+
+Usage: set-fan-mode [fan-mode] [fan-speed]
+
+Without arguments: display current fan mode
+
+Arguments:
+  fan-mode  : <Fan mode to set>
+  fan-speed : <Fan speed in % for "fix" and "automax" modes>
+
+Fan modes: normal | quiet | gaming | deepcontrol | fix | automax
+
+Examples:
+  set-fan-mode            # display current fan mode
+  set-fan-mode normal     # set fan mode to "normal"
+  set-fan-mode fix 50     # set fan mode to "fix" with speed 50%
+```
+
 ## Normal mode
 Mod by default, presents a balance of fan speeds, noise and performance.
 <p align="center">
