@@ -86,7 +86,7 @@ void fail(const char* msg) {
 int main(int argc, char** args) {
   FILE* ec = initEc();
   if (!ec) fail("Unable to initialize embedded controller; did you forget to use sudo?");
-
+  // Write bit or byte
   if (argc == 3) {
     char* dotIdx = strchr(args[1], '.');
     if (dotIdx != NULL) {
@@ -101,6 +101,24 @@ int main(int argc, char** args) {
       unsigned char value = (unsigned char)strtol(args[2], NULL, 0);
       write8(ec, offset, value);
     }
+
+  // Read bit or byte
+  } else if (argc == 2) {
+      unsigned char value = 0;
+      char* dotIdx = strchr(args[1], '.');
+      if (dotIdx != NULL) {
+        *dotIdx = '\0';
+        dotIdx++;
+        unsigned char offset = (unsigned char)strtol(args[1], NULL, 0);
+        unsigned char bit = (unsigned char)atoi(dotIdx);
+        value = read1(ec, offset, bit);
+      } else {
+        unsigned char offset = (unsigned char)strtol(args[1], NULL, 0);
+        value = read8(ec, offset);
+      }
+      printf("%d\n", value);
+
+  // Overall status
   } else {
     // Setting the following bits causing the EC to activate (or at least activate fan controls)
     write8(ec, 0x01, 0xA3);
